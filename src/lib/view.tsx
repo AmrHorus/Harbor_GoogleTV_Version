@@ -26,15 +26,11 @@ export type View =
   | "anime"
   | "discover"
   | "catalogs"
-  | "addons"
   | "calendar"
   | "movies"
   | "shows"
   | "kids"
   | "library"
-  | "live"
-  | "vod"
-  | "downloads"
   | "wrapped";
 
 export type PlayEpisode = {
@@ -111,8 +107,6 @@ export type Frame =
   | { kind: "anime" }
   | { kind: "discover" }
   | { kind: "catalogs" }
-  | { kind: "addons" }
-  | { kind: "addon-detail"; id: string }
   | { kind: "calendar" }
   | { kind: "wrapped" }
   | { kind: "queue" }
@@ -120,9 +114,6 @@ export type Frame =
   | { kind: "shows" }
   | { kind: "kids" }
   | { kind: "library" }
-  | { kind: "live" }
-  | { kind: "vod" }
-  | { kind: "downloads" }
   | { kind: "service"; service: StreamingService }
   | {
       kind: "meta";
@@ -157,8 +148,6 @@ const ROOT_VIEW_BY_KIND: Record<Frame["kind"], View | null> = {
   anime: "anime",
   discover: "discover",
   catalogs: "catalogs",
-  addons: "addons",
-  "addon-detail": "addons",
   calendar: "calendar",
   wrapped: "wrapped",
   queue: "discover",
@@ -166,9 +155,6 @@ const ROOT_VIEW_BY_KIND: Record<Frame["kind"], View | null> = {
   shows: "shows",
   kids: "kids",
   library: "library",
-  live: "live",
-  vod: "vod",
-  downloads: "downloads",
   service: null,
   meta: null,
   "episode-detail": null,
@@ -321,10 +307,6 @@ function frameKey(f: Frame): string {
       return "discover";
     case "catalogs":
       return "catalogs";
-    case "addons":
-      return "addons";
-    case "addon-detail":
-      return `addon-detail:${f.id}`;
     case "calendar":
       return "calendar";
     case "wrapped":
@@ -339,12 +321,6 @@ function frameKey(f: Frame): string {
       return "kids";
     case "library":
       return "library";
-    case "live":
-      return "live";
-    case "vod":
-      return "vod";
-    case "downloads":
-      return "downloads";
     case "service":
       return `service:${f.service}`;
     case "meta":
@@ -608,11 +584,6 @@ export function ViewProvider({ children }: { children: ReactNode }) {
           rowScrollMem.current.clear();
           return [{ kind: "catalogs" }];
         }
-        if (v === "addons") {
-          scrollMem.current.clear();
-          rowScrollMem.current.clear();
-          return [{ kind: "addons" }];
-        }
         if (v === "calendar") {
           scrollMem.current.clear();
           rowScrollMem.current.clear();
@@ -622,11 +593,6 @@ export function ViewProvider({ children }: { children: ReactNode }) {
           scrollMem.current.clear();
           rowScrollMem.current.clear();
           return [{ kind: "wrapped" }];
-        }
-        if (v === "downloads") {
-          scrollMem.current.clear();
-          rowScrollMem.current.clear();
-          return [{ kind: "downloads" }];
         }
         if (v === "movies") {
           scrollMem.current.clear();
@@ -647,16 +613,6 @@ export function ViewProvider({ children }: { children: ReactNode }) {
           scrollMem.current.clear();
           rowScrollMem.current.clear();
           return [{ kind: "library" }];
-        }
-        if (v === "live") {
-          scrollMem.current.clear();
-          rowScrollMem.current.clear();
-          return [{ kind: "live" }];
-        }
-        if (v === "vod") {
-          scrollMem.current.clear();
-          rowScrollMem.current.clear();
-          return [{ kind: "vod" }];
         }
         if (t.kind === "settings") return s;
         return pushFrame(s, { kind: "settings" });
