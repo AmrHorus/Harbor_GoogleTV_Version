@@ -1,43 +1,78 @@
-node_modules
-dist
-dist-ssr
-*.local
-*.bak
-*.tmp.*
-_backups/
+```
+# Compiled and build artifacts
+*.pyc
+__pycache__/
+*.o
+*.obj
+dist/
+build/
+target/
 
+# Dependencies
+node_modules/
+venv/
+.venv/
 .env
+.env.local
 .env.*
-!.env.example
 
-target
-.flatpak-work/
-
-*.tsbuildinfo
-/vite.config.js
-/vite.config.d.ts
-
-logs
+# Logs and temp files
 *.log
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-pnpm-debug.log*
+*.tmp
+*.swp
 
+# Editors
+.vscode/
+.idea/
+
+# Coverage
+coverage/
+htmlcov/
+.coverage
+
+# Python specific
+*.py[cod]
+*$py.class
+*.so
+.Python
+pip-log.txt
+pip-delete-this-directory.txt
+.tox/
+.coverage*
+.cache/
+
+# Compressed files
+*.zip
+*.gz
+*.tar
+*.tgz
+*.bz2
+*.xz
+*.7z
+*.rar
+*.zst
+*.lz4
+*.lzh
+*.cab
+*.arj
+*.rpm
+*.deb
+*.Z
+*.lz
+*.lzo
+*.tar.gz
+*.tar.bz2
+*.tar.xz
+*.tar.zst
+
+# MyPy cache
+.mypy_cache/
+.pytest_cache/
+
+# Gradle
+.gradle/
+
+# DS Store
 .DS_Store
-.idea
-.vscode/*
-!.vscode/extensions.json
-*.suo
-*.sw?
-
-/src-tauri/binaries/stremio-server-*
-/src-tauri/binaries/yt-dlp-*
-/src-tauri/binaries/ffmpeg*
-/src-tauri/binaries/ffprobe*
-/src-tauri/binaries/mpv-*
-/src-tauri/libmpv/libmpv-2.dll
-/src-tauri/fonts/*.otf
-/src-tauri/fonts/*.ttf
-local_docs/
-
+Thumbs.db
+```

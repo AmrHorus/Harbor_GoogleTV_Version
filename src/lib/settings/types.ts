@@ -242,7 +242,16 @@ export type Settings = {
   subBoxColor: string;
   subOpacity: number;
   subLineSpacing: number;
-  subProvidersEnabled: { wyzie: boolean; opensubtitles: boolean; jimaku: boolean; addons: boolean };
+  subProvidersEnabled: { 
+    wyzie: boolean; 
+    opensubtitles: boolean; 
+    jimaku: boolean; 
+    addons: boolean;
+    opensubtitlesPro: boolean;
+    subsource: boolean;
+    subdl: boolean;
+    subsense: boolean;
+  };
   subShowInPip: boolean;
   subtitleAutoSync: boolean;
   subtitlesOffByDefault: boolean;
