@@ -25,6 +25,8 @@ import { normalizeSearchQuery } from "@/lib/search-query";
 import { gatherCatalogAddons, type Addon } from "@/lib/addons";
 import { useAuth } from "@/lib/auth";
 import { useSettings } from "@/lib/settings";
+import { enhancedSearchWithArabic } from "@/lib/arabic/arabic-search-engine";
+import { isArabicQuery } from "@/lib/arabic/search-normalization";
 
 type SearchState = {
   open: boolean;
@@ -153,14 +155,18 @@ export function SearchProvider({ children }: { children: ReactNode }) {
       setStatus("loading");
       const liveTv = liveTvAllowed ? searchLiveTvChannels(trimmed, settings.iptvPlaylists) : [];
       const normalizedQuery = normalizeSearchQuery(trimmed);
+      const isArabic = isArabicQuery(trimmed);
       const tmdbCacheKey = [
         settings.tmdbKey,
         settings.tmdbLanguage,
         excludeGenres.join(","),
         normalizedQuery,
+        isArabic ? "arabic" : "latin",
       ].join("\0");
       const tmdbPromise = cachedSearch(tmdbCacheRef.current, tmdbCacheKey, TMDB_CACHE_TTL_MS, () =>
-        searchAll(settings.tmdbKey, trimmed, { excludeGenres }),
+        isArabic 
+          ? enhancedSearchWithArabic(settings.tmdbKey, trimmed, { excludeGenres })
+          : searchAll(settings.tmdbKey, trimmed, { excludeGenres }),
       );
       const animePromise = animeAllowed
         ? cachedSearch(animeCacheRef.current, normalizedQuery, SECONDARY_CACHE_TTL_MS, () =>
