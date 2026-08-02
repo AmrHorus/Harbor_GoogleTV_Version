@@ -13,6 +13,8 @@ import { SettingsIcon } from "@/components/icons/settings-icon";
 import { TvIcon } from "@/components/icons/tv-icon";
 import { KidsIcon } from "@/components/icons/kids-icon";
 import { DownloadsNavIcon } from "@/chrome/downloads-nav-icon";
+import { FamilyIcon } from "@/components/icons/family-icon";
+import { TogetherIcon } from "@/components/icons/together-icon";
 import type { LockableTab } from "@/lib/parental";
 import type { View } from "@/lib/view";
 
@@ -26,6 +28,8 @@ export type NavItemId =
   | "anime"
   | "calendar"
   | "library"
+  | "family"
+  | "together"
   | "settings";
 
 export type NavItem = {
@@ -96,6 +100,20 @@ export const NAV_ITEMS: NavItem[] = [
     render: (active) => <LibraryIcon active={active} />,
     view: "library",
     parentalKey: "library",
+  },
+  {
+    id: "family",
+    label: "nav.family",
+    render: (active) => <FamilyIcon active={active} />,
+    view: "family",
+    parentalKey: "family",
+  },
+  {
+    id: "together",
+    label: "nav.together",
+    render: (active) => <TogetherIcon active={active} />,
+    view: "together",
+    parentalKey: "together",
   },
   {
     id: "settings",
