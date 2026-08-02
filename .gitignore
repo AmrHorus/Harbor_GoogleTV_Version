@@ -9,21 +9,33 @@ build/
 target/
 
 # Dependencies
-node_modules/
-venv/
 .venv/
-.env
-.env.local
-.env.*
+venv/
+node_modules/
+.julia/
+zig-cache/
+.deps/
 
 # Logs and temp files
 *.log
 *.tmp
 *.swp
+*.swo
+
+# Environment
+.env
+.env.local
+.env.*
 
 # Editors
 .vscode/
 .idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
 
 # Coverage
 coverage/
@@ -31,17 +43,41 @@ htmlcov/
 .coverage
 
 # Python specific
-*.py[cod]
-*$py.class
-*.so
+*.pyc
+__pycache__/
+*.pyo
+*.pyd
 .Python
-pip-log.txt
-pip-delete-this-directory.txt
-.tox/
-.coverage*
-.cache/
+*.so
+.coverage
+.pytest_cache/
+.mypy_cache/
 
-# Compressed files
+# Node specific
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Java specific
+*.class
+*.jar
+*.war
+*.ear
+*.war
+hs_err_pid*
+replay_pid*
+
+# C/C++ specific
+*.o
+*.a
+*.so
+*.dll
+*.exe
+*.out
+*.obj
+
+# Compression
 *.zip
 *.gz
 *.tar
@@ -64,15 +100,4 @@ pip-delete-this-directory.txt
 *.tar.bz2
 *.tar.xz
 *.tar.zst
-
-# MyPy cache
-.mypy_cache/
-.pytest_cache/
-
-# Gradle
-.gradle/
-
-# DS Store
-.DS_Store
-Thumbs.db
 ```
