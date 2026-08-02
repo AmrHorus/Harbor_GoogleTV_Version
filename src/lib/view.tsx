@@ -31,7 +31,9 @@ export type View =
   | "shows"
   | "kids"
   | "library"
-  | "wrapped";
+  | "wrapped"
+  | "family"
+  | "together";
 
 export type PlayEpisode = {
   season: number;
@@ -114,6 +116,8 @@ export type Frame =
   | { kind: "shows" }
   | { kind: "kids" }
   | { kind: "library" }
+  | { kind: "family" }
+  | { kind: "together" }
   | { kind: "service"; service: StreamingService }
   | {
       kind: "meta";
@@ -155,6 +159,8 @@ const ROOT_VIEW_BY_KIND: Record<Frame["kind"], View | null> = {
   shows: "shows",
   kids: "kids",
   library: "library",
+  family: "family",
+  together: "together",
   service: null,
   meta: null,
   "episode-detail": null,
@@ -321,6 +327,10 @@ function frameKey(f: Frame): string {
       return "kids";
     case "library":
       return "library";
+    case "family":
+      return "family";
+    case "together":
+      return "together";
     case "service":
       return `service:${f.service}`;
     case "meta":
