@@ -4,11 +4,23 @@ import type { SubResult, SubSearchQuery } from "./types";
 import { searchWyzie } from "./providers/wyzie";
 import { searchAddons } from "./providers/addons";
 import { searchOpenSubtitlesV3 } from "./providers/opensubtitles-v3";
+import { searchOpenSubtitlesPro } from "./providers/opensubtitles-pro";
+import { searchSubSource } from "./providers/subsource";
+import { searchSubDL } from "./providers/subdl";
+import { searchSubSense } from "./providers/subsense";
 import { langScore, normalizeLang } from "./language";
 import { SUBTITLE_PROVIDER_TIMEOUT_MS, withSubtitleTimeout } from "./autoload";
 
 export type SearchOptions = {
-  providers?: { wyzie?: boolean; addons?: boolean; opensubtitles?: boolean };
+  providers?: { 
+    wyzie?: boolean; 
+    addons?: boolean; 
+    opensubtitles?: boolean;
+    opensubtitlesPro?: boolean;
+    subsource?: boolean;
+    subdl?: boolean;
+    subsense?: boolean;
+  };
   addons?: Addon[];
   preferredLangs: string[];
   streamHints?: StreamHints;
@@ -29,9 +41,13 @@ export async function searchSubtitles(
   const wyzieOn = want.wyzie === true;
   const addonsOn = want.addons ?? true;
   const osOn = want.opensubtitles ?? true;
+  const osProOn = want.opensubtitlesPro ?? true;
+  const subsourceOn = want.subsource ?? true;
+  const subdlOn = want.subdl ?? true;
+  const subsenseOn = want.subsense ?? true;
   dinfo("[subs] search", {
     q,
-    providers: { osOn, addonsOn, wyzieOn },
+    providers: { osOn, addonsOn, wyzieOn, osProOn, subsourceOn, subdlOn, subsenseOn },
     addons: opts.addons?.length ?? 0,
   });
   const tasks: Array<{ name: string; p: Promise<SubResult[]> }> = [];
@@ -40,10 +56,30 @@ export async function searchSubtitles(
       name: "opensubtitles-v3",
       p: withSubtitleTimeout(searchOpenSubtitlesV3(q), SUBTITLE_PROVIDER_TIMEOUT_MS, []),
     });
+  if (osProOn)
+    tasks.push({
+      name: "opensubtitles-pro",
+      p: withSubtitleTimeout(searchOpenSubtitlesPro(q), SUBTITLE_PROVIDER_TIMEOUT_MS, []),
+    });
   if (wyzieOn)
     tasks.push({
       name: "wyzie",
       p: withSubtitleTimeout(searchWyzie(q), SUBTITLE_PROVIDER_TIMEOUT_MS, []),
+    });
+  if (subsourceOn)
+    tasks.push({
+      name: "subsource",
+      p: withSubtitleTimeout(searchSubSource(q), SUBTITLE_PROVIDER_TIMEOUT_MS, []),
+    });
+  if (subdlOn)
+    tasks.push({
+      name: "subdl",
+      p: withSubtitleTimeout(searchSubDL(q), SUBTITLE_PROVIDER_TIMEOUT_MS, []),
+    });
+  if (subsenseOn)
+    tasks.push({
+      name: "subsense",
+      p: withSubtitleTimeout(searchSubSense(q), SUBTITLE_PROVIDER_TIMEOUT_MS, []),
     });
   if (addonsOn && opts.addons && opts.addons.length > 0)
     tasks.push({
@@ -112,10 +148,18 @@ function streamMatchScore(r: SubResult, hints: StreamHints | undefined): number 
 function sourcePriority(source: SubResult["source"]): number {
   switch (source) {
     case "addon":
-      return 3;
+      return 5;
+    case "opensubtitles-pro":
+      return 4;
     case "opensubtitles":
-      return 2;
+      return 3;
+    case "subdl":
+      return 3;
     case "wyzie":
+      return 2;
+    case "subsource":
+      return 2;
+    case "subsense":
       return 2;
     case "jimaku":
       return 1;
