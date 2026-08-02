@@ -24,12 +24,8 @@ export type NavItemId =
   | "shows"
   | "kids"
   | "anime"
-  | "live"
-  | "vod"
   | "calendar"
   | "library"
-  | "downloads"
-  | "addons"
   | "settings";
 
 export type NavItem = {
@@ -88,20 +84,6 @@ export const NAV_ITEMS: NavItem[] = [
     parentalKey: "anime",
   },
   {
-    id: "live",
-    label: "nav.live",
-    render: (active) => <LiveTvIcon active={active} />,
-    view: "live",
-    hideKey: "liveTv",
-    parentalKey: "liveTv",
-  },
-  {
-    id: "vod",
-    label: "nav.playlists",
-    render: (active) => <PlaylistVodIcon active={active} />,
-    view: "vod",
-  },
-  {
     id: "calendar",
     label: "nav.calendar",
     render: (active) => <CalendarIcon active={active} />,
@@ -114,19 +96,6 @@ export const NAV_ITEMS: NavItem[] = [
     render: (active) => <LibraryIcon active={active} />,
     view: "library",
     parentalKey: "library",
-  },
-  {
-    id: "downloads",
-    label: "nav.downloads",
-    render: (active) => <DownloadsNavIcon active={active} />,
-    view: "downloads",
-  },
-  {
-    id: "addons",
-    label: "nav.addons",
-    render: (active) => <AddonsIcon active={active} />,
-    view: "addons",
-    parentalKey: "addons",
   },
   {
     id: "settings",
