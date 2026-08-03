@@ -1,3 +1,6 @@
+packages:
+  - '.'
+  - 'src-tauri'
 allowBuilds:
   esbuild: true
 blockExoticSubdeps: false
