@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">هاربور</string>
+    
+    <!-- Navigation -->
+    <string name="nav_home">الرئيسية</string>
+    <string name="nav_search">بحث</string>
+    <string name="nav_discover">اكتشف</string>
+    <string name="nav_library">مكتبتي</string>
+    <string name="nav_movies">أفلام</string>
+    <string name="nav_series">مسلسلات</string>
+    <string name="nav_anime">أنمي</string>
+    <string name="nav_live_tv">تلفاز مباشر</string>
+    <string name="nav_calendar">التقويم</string>
+    <string name="nav_addons">الإضافات</string>
+    <string name="nav_settings">الإعدادات</string>
+    
+    <!-- Actions -->
+    <string name="action_play">تشغيل</string>
+    <string name="action_resume">استئناف</string>
+    <string name="action_details">التفاصيل</string>
+    <string name="action_add_to_library">إضافة إلى المكتبة</string>
+    <string name="action_remove_from_library">إزالة من المكتبة</string>
+    <string name="action_mark_watched">تمييز كمشاهد</string>
+    <string name="action_select_season">اختر الموسم</string>
+    <string name="action_select_episode">اختر الحلقة</string>
+    <string name="action_more">المزيد</string>
+    
+    <!-- Home Screen -->
+    <string name="home_continue_watching">متابعة المشاهدة</string>
+    <string name="home_trending_movies">الأفلام الشائعة</string>
+    <string name="home_trending_series">المسلسلات الشائعة</string>
+    <string name="home_popular">شائع</string>
+    <string name="home_top_rated">الأعلى تقييماً</string>
+    <string name="home_new_releases">إصدارات جديدة</string>
+    
+    <!-- Content Details -->
+    <string name="detail_year">السنة</string>
+    <string name="detail_runtime">المدة</string>
+    <string name="detail_genres">الأنواع</string>
+    <string name="detail_rating">التقييم</string>
+    <string name="detail_description">الوصف</string>
+    <string name="detail_cast">طاقم التمثيل</string>
+    <string name="detail_directors">المخرجون</string>
+    <string name="detail_seasons">المواسم</string>
+    <string name="detail_episodes">الحلقات</string>
+    
+    <!-- Player -->
+    <string name="player_buffering">جارٍ التحميل…</string>
+    <string name="player_error">خطأ في التشغيل</string>
+    <string name="player_retry">إعادة المحاولة</string>
+    <string name="player_subtitles">الترجمة</string>
+    <string name="player_audio">الصوت</string>
+    <string name="player_quality">الجودة</string>
+    <string name="player_speed">السرعة</string>
+    <string name="player_seek_forward">تقديم</string>
+    <string name="player_seek_back">إرجاع</string>
+    
+    <!-- Search -->
+    <string name="search_hint">ابحث عن أفلام، مسلسلات، أنمي…</string>
+    <string name="search_results">نتائج البحث</string>
+    <string name="search_no_results">لم يتم العثور على نتائج</string>
+    <string name="search_suggestions">اقتراحات</string>
+    
+    <!-- Settings -->
+    <string name="settings_general">عام</string>
+    <string name="settings_playback">التشغيل</string>
+    <string name="settings_subtitles">الترجمة</string>
+    <string name="settings_audio">الصوت</string>
+    <string name="settings_appearance">المظهر</string>
+    <string name="settings_language">اللغة</string>
+    <string name="settings_account">الحساب</string>
+    <string name="settings_addons">الإضافات</string>
+    <string name="settings_network">الشبكة</string>
+    <string name="settings_advanced">متقدم</string>
+    <string name="settings_about">حول</string>
+    
+    <!-- Errors -->
+    <string name="error_network">خطأ في الشبكة. يرجى التحقق من اتصالك.</string>
+    <string name="error_load_failed">فشل تحميل المحتوى</string>
+    <string name="error_retry">إعادة المحاولة</string>
+    <string name="error_no_internet">لا يوجد اتصال بالإنترنت</string>
+    <string name="error_addon_unavailable">الإضافة غير متاحة</string>
+    <string name="error_stream_not_found">لا توجد تيارات متاحة</string>
+    
+    <!-- Loading -->
+    <string name="loading">جارٍ التحميل…</string>
+    
+    <!-- Accessibility -->
+    <string name="accessibility_poster">ملصق لـ %1$s</string>
+    <string name="accessibility_backdrop">خلفية لـ %1$s</string>
+    <string name="accessibility_play">تشغيل %1$s</string>
+    <string name="accessibility_navigate_up">التنقل للأعلى</string>
+    <string name="accessibility_navigate_down">التنقل للأسفل</string>
+</resources>
