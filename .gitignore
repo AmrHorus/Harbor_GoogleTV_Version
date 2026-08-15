@@ -1,11 +1,18 @@
 ```
-# Dependencies
-node_modules/
-.pnpm-store/
+# Build artifacts
+build/
+.gradle/
 
-# Build outputs
-src-tauri/target/
-src-tauri/bundle/
+# Dependencies
+.libs/
+
+# IDE files
+.idea/
+.vscode/
+
+# Compiled files
+*.class
+*.dex
 
 # Logs
 *.log
@@ -15,11 +22,40 @@ src-tauri/bundle/
 .env.local
 *.env.*
 
-# Editor
-.vscode/
-.idea/
-
-# OS
+# OS generated files
 .DS_Store
 Thumbs.db
+
+# Coverage reports
+coverage/
+htmlcov/
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+
+# Compressed files
+*.zip
+*.gz
+*.tar
+*.tgz
+*.bz2
+*.xz
+*.7z
+*.rar
+*.zst
+*.lz4
+*.lzh
+*.cab
+*.arj
+*.rpm
+*.deb
+*.Z
+*.lz
+*.lzo
+*.tar.gz
+*.tar.bz2
+*.tar.xz
+*.tar.zst
 ```
