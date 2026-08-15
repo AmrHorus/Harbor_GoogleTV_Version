@@ -1,4 +1,4 @@
-package site.harbor.android.player
+package site.zizi.android.player
 
 import android.content.Context
 import androidx.media3.common.MediaItem
@@ -8,28 +8,20 @@ import androidx.media3.exoplayer.ExoPlayer
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import javax.inject.Inject
+import javax.inject.Singleton
 
 /**
- * Harbor Player Manager using Media3/ExoPlayer
- * Handles video playback with support for HLS, DASH, and progressive streams
+ * Wrapper around ExoPlayer for media playback
  */
-class HarborPlayer(private val context: Context) {
-    
+@Singleton
+class ZiziPlayer @Inject constructor(
+    private val context: Context
+) {
     private var exoPlayer: ExoPlayer? = null
-    
-    sealed class PlayerState {
-        object Idle : PlayerState()
-        object Buffering : PlayerState()
-        object Ready : PlayerState()
-        object Ended : PlayerState()
-        data class Error(val exception: PlaybackException) : PlayerState()
-    }
     
     private val _playerState = MutableStateFlow<PlayerState>(PlayerState.Idle)
     val playerState: StateFlow<PlayerState> = _playerState.asStateFlow()
-    
-    private val _isPlaying = MutableStateFlow(false)
-    val isPlaying: StateFlow<Boolean> = _isPlaying.asStateFlow()
     
     private val _currentPosition = MutableStateFlow(0L)
     val currentPosition: StateFlow<Long> = _currentPosition.asStateFlow()
@@ -37,8 +29,11 @@ class HarborPlayer(private val context: Context) {
     private val _duration = MutableStateFlow(0L)
     val duration: StateFlow<Long> = _duration.asStateFlow()
     
+    private val _isPlaying = MutableStateFlow(false)
+    val isPlaying: StateFlow<Boolean> = _isPlaying.asStateFlow()
+    
     /**
-     * Initialize the player
+     * Initialize the ExoPlayer instance
      */
     fun initialize() {
         if (exoPlayer == null) {
@@ -58,8 +53,8 @@ class HarborPlayer(private val context: Context) {
                         _isPlaying.value = isPlaying
                     }
                     
-                    override fun onPlayerError(error: PlaybackException) {
-                        _playerState.value = PlayerState.Error(error)
+                    override fun onPlaybackError(error: PlaybackException) {
+                        _playerState.value = PlayerState.Error(error.message ?: "Unknown playback error")
                     }
                 })
             }
@@ -67,13 +62,14 @@ class HarborPlayer(private val context: Context) {
     }
     
     /**
-     * Set media source and prepare for playback
+     * Set the media URL and prepare for playback
      */
-    fun setMediaSource(url: String, subtitleUrls: List<String> = emptyList()) {
+    fun setMediaUrl(url: String, startPosition: Long = 0L) {
         exoPlayer?.let { player ->
             val mediaItem = MediaItem.fromUri(url)
-            player.setMediaItem(mediaItem)
+            player.setMediaItem(mediaItem, startPosition)
             player.prepare()
+            _playerState.value = PlayerState.Buffering
         }
     }
     
@@ -92,50 +88,64 @@ class HarborPlayer(private val context: Context) {
     }
     
     /**
-     * Seek to position
+     * Seek to a specific position
      */
     fun seekTo(positionMs: Long) {
         exoPlayer?.seekTo(positionMs)
     }
     
     /**
-     * Seek forward by specified amount
+     * Seek forward by specified milliseconds
      */
-    fun seekForward(amountMs: Long = 10000L) {
-        val newPosition = (currentPosition.value + amountMs).coerceAtMost(duration.value)
-        seekTo(newPosition)
+    fun seekForward(byMs: Long = 10000L) {
+        val newPosition = (exoPlayer?.currentPosition ?: 0L) + byMs
+        exoPlayer?.seekTo(newPosition.coerceAtMost(exoPlayer?.duration ?: 0L))
     }
     
     /**
-     * Seek backward by specified amount
+     * Seek backward by specified milliseconds
      */
-    fun seekBackward(amountMs: Long = 10000L) {
-        val newPosition = (currentPosition.value - amountMs).coerceAtLeast(0L)
-        seekTo(newPosition)
+    fun seekBackward(byMs: Long = 10000L) {
+        val newPosition = (exoPlayer?.currentPosition ?: 0L) - byMs
+        exoPlayer?.seekTo(newPosition.coerceAtLeast(0L))
+    }
+    
+    /**
+     * Get current playback speed
+     */
+    fun getPlaybackSpeed(): Float {
+        return exoPlayer?.playbackParameters?.speed ?: 1.0f
     }
     
     /**
      * Set playback speed
      */
     fun setPlaybackSpeed(speed: Float) {
-        exoPlayer?.setPlaybackSpeed(speed.coerceIn(0.25f, 4.0f))
+        exoPlayer?.setPlaybackSpeed(speed)
     }
     
     /**
-     * Get current playback speed
-     */
-    fun getPlaybackSpeed(): Float = exoPlayer?.playbackParameters?.speed ?: 1.0f
-    
-    /**
-     * Release player resources
+     * Release the player resources
      */
     fun release() {
         exoPlayer?.release()
         exoPlayer = null
+        _playerState.value = PlayerState.Idle
     }
     
     /**
      * Get the underlying ExoPlayer instance for advanced operations
      */
     fun getPlayer(): Player? = exoPlayer
+}
+
+/**
+ * Sealed class representing player states
+ */
+sealed class PlayerState {
+    object Idle : PlayerState()
+    object Buffering : PlayerState()
+    object Ready : PlayerState()
+    object Ended : PlayerState()
+    data class Error(val message: String) : PlayerState()
 }

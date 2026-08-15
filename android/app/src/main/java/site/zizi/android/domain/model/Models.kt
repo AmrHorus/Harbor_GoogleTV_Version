@@ -1,10 +1,10 @@
-package site.harbor.android.domain.model
+package site.zizi.android.domain.model
 
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 /**
- * Domain models for Harbor Android
+ * Domain models for Zizi Android
  * Based on harbor-core/src/types.rs and src/lib/stremio.ts
  */
 
@@ -72,7 +72,7 @@ data class Meta(
     val runtime: String? = null,
     val year: Int? = null,
     val videos: List<Video>? = null,
-    val trailers: List< Trailer>? = null
+    val trailers: List<Trailer>? = null
 )
 
 @Serializable
@@ -168,7 +168,7 @@ sealed class Resource {
     @Serializable
     @SerialName("string")
     data class Simple(val value: String) : Resource()
-    
+
     @Serializable
     @SerialName("object")
     data class Detailed(

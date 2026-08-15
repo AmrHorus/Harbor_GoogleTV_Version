@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace = "site.harbor.android"
+    namespace = "site.zizi.android"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "site.harbor.android"
+        applicationId = "site.zizi.android"
         minSdk = 26
         targetSdk = 35
         versionCode = 1
@@ -23,7 +23,7 @@ android {
         }
 
         // TV configuration
-        manifestPlaceholders["leanbackLaunchActivity"] = "site.harbor.android.MainActivity"
+        manifestPlaceholders["leanbackLaunchActivity"] = "site.zizi.android.MainActivity"
     }
 
     buildTypes {

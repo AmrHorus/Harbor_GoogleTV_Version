@@ -2,26 +2,26 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    
-    <!-- Harbor Brand Colors -->
-    <color name="harbor_primary">#FF6B35</color>
-    <color name="harbor_primary_dark">#E55A2B</color>
-    <color name="harbor_secondary">#1A1A2E</color>
-    <color name="harbor_background">#0F0F1A</color>
-    <color name="harbor_surface">#1A1A2E</color>
-    <color name="harbor_on_primary">#FFFFFF</color>
-    <color name="harbor_on_background">#FFFFFF</color>
-    <color name="harbor_on_surface">#FFFFFF</color>
-    
+
+    <!-- Zizi Brand Colors -->
+    <color name="zizi_primary">#FF6B35</color>
+    <color name="zizi_primary_dark">#E55A2B</color>
+    <color name="zizi_secondary">#1A1A2E</color>
+    <color name="zizi_background">#0F0F1A</color>
+    <color name="zizi_surface">#1A1A2E</color>
+    <color name="zizi_on_primary">#FFFFFF</color>
+    <color name="zizi_on_background">#FFFFFF</color>
+    <color name="zizi_on_surface">#FFFFFF</color>
+
     <!-- TV Focus Colors -->
     <color name="focus_highlight">#FF6B35</color>
     <color name="focus_overlay">#40FF6B35</color>
-    
+
     <!-- Status Colors -->
     <color name="error">#FF5252</color>
     <color name="success">#4CAF50</color>
     <color name="warning">#FFC107</color>
-    
+
     <!-- Text Colors -->
     <color name="text_primary">#FFFFFF</color>
     <color name="text_secondary">#B3B3B3</color>
