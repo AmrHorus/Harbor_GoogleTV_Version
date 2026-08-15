@@ -1,5 +1,7 @@
+harbor-android-tv-implementation-adfcf
 package site.zizi.android
 
+package site.harbor.androi
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -12,13 +14,19 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import dagger.hilt.android.AndroidEntryPoint
+harbor-android-tv-implementation-adfcf
 import site.zizi.android.ui.tv.TvHomeScreen
 import site.zizi.android.ui.tv.TvNavigation
 
-/**
  * Main Activity for Zizi Android
- * Supports both phone/tablet and TV interfaces
- */
+
+import site.harbor.android.ui.tv.TvHomeScreen
+import site.harbor.android.ui.tv.TvNavigation
+
+ * Main Activity for Harbor Android
+
+ Supports both phone/tablet and TV interfaces
+ 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     

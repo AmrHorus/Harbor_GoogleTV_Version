@@ -19,6 +19,9 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-
+harbor-android-tv-implementation-adfcf
 rootProject.name = "Zizi"
+
+rootProject.name = "Harbor"
+
 include(":app")
